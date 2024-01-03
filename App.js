@@ -3,7 +3,10 @@ import elipse from "./assets/Ellipse_1.png";
 import { Image, StyleSheet, View } from "react-native";
 
 import { BlurView } from "expo-blur";
-import Button from "./components/MyButton";
+import Keypad from "./components/higher_components/KeyPad.js";
+import Screen from "./components/Screen.js";
+import store from "./myRedux/store.js";
+import { Provider } from "react-redux";
 
 const logo = {
   uri: "https://reactnative.dev/img/tiny_logo.png",
@@ -13,20 +16,23 @@ const logo = {
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      {/* <Image style={styles.background} source={elipse} /> */}
-      <BlurView intensity={0} style={styles.cover}>
-        <Button innerText={"2"} />
-      </BlurView>
-    </View>
+    <Provider store={store}>
+      <View style={styles.container}>
+        <StatusBar style="auto" />
+        {/* <Image style={styles.background} source={elipse} /> */}
+        <BlurView intensity={0} style={styles.cover}>
+          <Screen />
+          <Keypad />
+        </BlurView>
+      </View>
+    </Provider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#A0D7FF",
+    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },

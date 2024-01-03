@@ -1,18 +1,26 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
 import { useSelector } from "react-redux";
 
-const MyButton = ({ innerText, customStyles = {}, whenPressed }) => {
+export default function LongButton({
+  innerText,
+  vertical,
+  customStyles = {},
+  whenPressed,
+}) {
   const themeState = useSelector((state) => state.theme.value);
 
   return (
     <TouchableOpacity
       style={{
         ...styles.container,
+        width: vertical ? 65 : 120,
+        height: vertical ? 110 : 65,
+        flexGrow: 1,
+        flexShrink: 1,
         backgroundColor: themeState ? "#303136" : "rgba(255,255,255,1)",
         borderColor: themeState ? "#303136" : "white",
         shadowColor: themeState ? "#303136" : "#38B9FF",
-
         ...customStyles,
       }}
       onPress={whenPressed}
@@ -22,14 +30,12 @@ const MyButton = ({ innerText, customStyles = {}, whenPressed }) => {
       </BlurView>
     </TouchableOpacity>
   );
-};
-
-export default MyButton;
+}
 
 const styles = StyleSheet.create({
   container: {
-    width: 65,
-    height: 65,
+    borderColor: "white",
+    backgroundColor: "rgba(255,255,255,1)",
     borderWidth: 1,
     borderRadius: 20,
     justifyContent: "center",
